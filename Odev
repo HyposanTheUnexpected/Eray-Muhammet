@@ -1,0 +1,65 @@
+import random
+import math
+
+def egikatis(sonikihane, hizaltsinir=330, hizustsinir=1800):
+    g = 10
+    aci = math.radians(30)
+    topkonum = (0, sonikihane)
+    
+    uzaklikmesafesi = 20000 + 200 * random.randint(-10, 10)
+    genislikbaslangic = uzaklikmesafesi
+    genislikbitis = uzaklikmesafesi + 1000 + 100 * random.randint(-2, 2)
+
+    atissayisi = 0
+    
+    while True:
+        atissayisi += 1
+        
+        hizortalama = (hizaltsinir + hizustsinir) / 2
+        Vx = hizortalama * math.cos(aci)
+        Vy = hizortalama * math.sin(aci)
+        
+        T_uçuş = 2 * Vy / g
+        X_menzil = Vx * T_uçuş
+        
+        if genislikbaslangic <= X_menzil <= genislikbitis:
+            print(f"{atissayisi}. Atış: Hedef vuruldu! Koordinat: ({X_menzil}, {sonikihane})")
+            break
+        elif X_menzil < genislikbaslangic:
+            print(f"{atissayisi}. Atış: Hedefin önüne düştü")
+            hizaltsinir = hizortalama
+        else:
+            print(f"{atissayisi}. Atış: Hedefin arkasına düştü")
+            hizustsinir = hizortalama
+
+    return atissayisi, hizortalama
+
+sonikihane = 25
+atislar, vurushizi = egikatis(sonikihane)
+print(f"\nTopun {atislar} atış yaparak hedefi vurdu.\nVuruş hızı: {vurushizi:.2f} metre/sn")
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+def plot_parabola(topkonum, aci, vuruşhızı, atislar):
+    g = 10
+    x0, y0 = topkonum
+    
+    Vx = vuruşhızı * math.cos(aci)
+    Vy = vuruşhızı * math.sin(aci)
+    
+    T_ucus = 2 * Vy / g
+    t = np.linspace(0, T_ucus, 1000)
+
+    x = x0 + Vx * t
+    y = y0 + Vy * t - (1/2) * g * t**2
+    
+    plt.plot(x, y)
+    plt.title(f"Deneme sayısı = {atislar}")
+    plt.xlabel("Mesafe (m)")
+    plt.ylabel("Yükseklik (m)")
+    plt.xlim(0, 25000)
+    plt.show()
+
+plotparabola((0, sonikihane), math.radians(30), vurushizi, atislar)
