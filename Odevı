@@ -63,3 +63,4 @@ def plot_parabola(topkonum, aci, vuruşhızı, atislar):
     plt.show()
 
 plotparabola((0, sonikihane), math.radians(30), vurushizi, atislar)
+
