@@ -1,0 +1,71 @@
+import pandas as pad 
+
+  
+
+data = {'X': [1, 2, 2, 3, 4, 5, 6, 8, 10, 11], 
+
+        'Y': [3, 5, 3, 9, 7, 2, 8, 6, 6, 1], 
+
+        'Z': ['negatif', 'pozitif', 'pozitif', 'negatif', 'negatif', 'pozitif', 'pozitif', 'negatif', 'negatif', 'negatif']} 
+
+  
+
+df = pd.DataFrame(data) 
+
+print(df) 
+
+  
+
+  
+
+  
+
+import numpy as np 
+
+  
+
+new_x = 7 
+
+new_y = 3 
+
+  
+
+df['uzaklık'] = np.sqrt((df['X'] - new_x) ** 2 + (df['Y'] - new_y) ** 2) 
+
+df = df.sort_values('UZAKLIK') 
+
+  
+
+df.loc[4, 'X'] = new_x 
+
+df.loc[4, 'Y'] = new_y 
+
+df.loc[4, 'UZAKLIK'] = 0 
+
+df['sıralama'] = range(1, len(df) + 1) 
+
+  
+
+print(df) 
+
+  
+
+k = 3 
+
+nearest_neighbors = df[:k]['Z'] 
+
+class_counts = nearest_neighbors.value_counts() 
+
+  
+
+if class_counts['POZİTİF'] > class_counts['negatif']: 
+
+    yeni_ornek_sinif = 'pozitif' 
+
+else: 
+
+    yeni_ornek_sinif = 'negatif' 
+
+  
+
+print("Yeni örneğin sınıfı:", yeni_ornek_sinif) 
