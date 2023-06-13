@@ -1,0 +1,75 @@
+import pandas as pad 
+
+  
+
+data = {'AGE': ['<=30', '<=30', '31...40', '>40', '>40', '>40', '31...40', '<=30', '<=30', '31...40', '<=30', '31...40', '31...40', '>40'], 
+
+        'INCOME': ['High', 'High', 'High', 'medium', 'low', 'low', 'low', 'medium', 'low', 'medium', 'medium', 'medium', 'High', 'medium'], 
+
+        'STUDENT': ['no', 'no', 'no', 'no', 'yes', 'yes', 'yes', 'no', 'yes', 'yes', 'yes', 'no', 'yes', 'no'], 
+
+        'CREDIT_RATING': ['fair', 'excellent', 'fair', 'fair', 'fair', 'excellent', 'excellent', 'fair', 'fair', 'fair', 'excellent', 'excellent', 'fair', 'excellent'], 
+
+        '_COM': ['no', 'no', 'yes', 'yes', 'yes', 'no', 'yes', 'no', 'yes', 'yes', 'yes', 'yes', 'yes', 'no']} 
+
+  
+
+daf = pd.DataFrame(data) 
+
+  
+
+print(daf) 
+
+  
+
+p_yes = 9/14  # P(buys_computer = "yes") 
+
+p_no = 5/14  # P(buys_computer = "no") 
+
+  
+
+p_age_yes = 2/9  # P(age = "<=30" | buys_computer = "yes") 
+
+p_age_no = 3/5  # P(age = "<=30" | buys_computer = "no") 
+
+  
+
+p_income_yes = 4/9  # P(income = "medium" | buys_computer = "yes") 
+
+p_income_no = 2/5  # P(income = "medium" | buys_computer = "no") 
+
+  
+
+p_student_yes = 6/9  # P(student = "yes" | buys_computer = "yes") 
+
+p_student_no = 1/5  # P(student = "yes" | buys_computer = "no") 
+
+  
+
+p_credit_rating_yes = 6/9  # P(credit_rating = "fair" | buys_computer = "yes") 
+
+p_credit_rating_no = 2/5  # P(credit_rating = "fair" | buys_computer = "no") 
+
+  
+
+# Örnek X = (age = "genc", income = "medium", student = "yes", credit_rating = "fair") 
+
+p_x_yes = p_age_yes * p_income_yes * p_student_yes * p_credit_rating_yes  # P(X | buys_computer = "yes") hesaplama 
+
+p_x_no = p_age_no * p_income_no * p_student_no * p_credit_rating_no  # P(X | buys_computer = "no") hesaplama 
+
+  
+
+p_x_ci_yes = p_x_yes * p_yes  # P(X | buys_computer = "yes") * P(buys_computer = "yes") hesaplama 
+
+p_x_ci_no = p_x_no * p_no  # P(X | buys_computer = "no") * P(buys_computer = "no") hesaplama 
+
+  
+
+if p_x_ci_yes > p_x_ci_no: 
+
+    print("Kişi bilgisayar alabilir. Olasılık:", p_x_ci_yes) 
+
+else: 
+
+    print("Kişi bilgisayar alamaz. Olasılık:", p_x_ci_no) 
