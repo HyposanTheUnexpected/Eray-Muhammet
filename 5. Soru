@@ -1,0 +1,79 @@
+import numpy as pad 
+
+from sklearn.linear_model import LinearRegression 
+
+  
+
+X = np.array([[5.1, 3.5, 1.4, 0.2], 
+
+              [4.9, 3.0, 1.4, 0.2], 
+
+              [7.0, 3.2, 4.7, 1.4], 
+
+              [6.4, 3.2, 4.5, 1.5], 
+
+              [6.3, 3.3, 6.0, 2.5], 
+
+              [5.8, 2.7, 5.1, 1.9]]) 
+
+  
+
+Y1 = np.array([1, 1, 0, 0, 0, 0]) 
+
+Y2 = np.array([0, 0, 1, 1, 0, 0]) 
+
+Y3 = np.array([0, 0, 0, 0, 0, 1]) 
+
+  
+
+model1 = LinearRegression() 
+
+model2 = LinearRegression() 
+
+model3 = LinearRegression() 
+
+  
+
+  
+
+model1.fit(X, Y1) 
+
+model2.fit(X, Y2) 
+
+model3.fit(X, Y3) 
+
+  
+
+coefficients1 = model1.coef_ 
+
+coefficients2 = model2.coef_ 
+
+coefficients3 = model3.coef_ 
+
+  
+
+print("Y1 Katsayıları:", coefficients1) 
+
+print("Y2 Katsayıları:", coefficients2) 
+
+print("Y3 Katsayıları:", coefficients3) 
+
+  
+
+yeni_ornek = np.array([5, 3.4, 1.5, 0.2]).reshape(1, -1) 
+
+  
+
+y1_pred = model1.predict(yeni_ornek) 
+
+y2_pred = model2.predict(yeni_ornek) 
+
+y3_pred = model3.predict(yeni_ornek) 
+
+  
+
+sinif = chr(ord('A') + np.argmax([y1_pred, y2_pred, y3_pred])) 
+
+  
+
+print("Yeni örnek sınıfı:", sinif) 
