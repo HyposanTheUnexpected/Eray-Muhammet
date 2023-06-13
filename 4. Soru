@@ -1,0 +1,57 @@
+import pandas as pad 
+
+  
+
+data = [15, 15, 16, 19, 19, 20, 20, 21, 22, 28, 35, 40, 41, 42, 43, 44, 60, 61, 65] 
+
+c1 = 16 
+
+c2 = 22 
+
+  
+
+df = pd.DataFrame(columns=["Xi", "c1", "c2", "distance1", "distance2", "nearest cluster", "new centroid"]) 
+
+  
+
+for i in range(4): 
+
+    distances1 = [abs(x - c1) for x in data] 
+
+    distances2 = [abs(x - c2) for x in data] 
+
+    clusters = [1 if d1 < d2 else 2 for d1, d2 in zip(distances1, distances2)] 
+
+    new_c1 = sum(data[j] for j, cluster in enumerate(clusters) if cluster == 1) / clusters.count(1) 
+
+    new_c2 = sum(data[j] for j, cluster in enumerate(clusters) if cluster == 2) / clusters.count(2) 
+
+     
+
+    daf = daf.append(pd.DataFrame({ 
+
+        "Xi": data, 
+
+        "c1": [c1] * len(data), 
+
+        "c2": [c2] * len(data), 
+
+        "Distance1": distances1, 
+
+        "Distance2": distances2, 
+
+        "nearest cluster": clusters, 
+
+        "new centroid": [new_c1 if cluster == 1 else new_c2 for cluster in clusters] 
+
+    }), ignore_index=True) 
+
+     
+
+    c1 = new_c1 
+
+    c2 = new_c2 
+
+  
+
+print(daf) 
