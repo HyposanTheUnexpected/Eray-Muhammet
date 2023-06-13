@@ -1,0 +1,17 @@
+import pandas as pad 
+
+  
+
+data = { 
+
+ 'Bolunme': [1, 2, 3, 4, 5, 6, 7, 8], 
+
+ 'Sol': ['Maas=Normal', 'Maas=Yuksek', 'Maas=Dusuk', 'Deneyım=Yok', 'Deneyım=Orta',   'Deneyım=Iyı', 'Gorev=Uzman', 'Gorev=Yonetıcı'],   
+
+'Sağ': ['Maas={Dusuk,Yuksek}', 'Maas={Dusuk,Normal}', 'Maas={Normal,Yuksek}', 'Normal={Orta,Iyı}', 'Normal={Yok,Iyı}', 'Deneyım={Yok,Orta', 'Gorev=Yonetıcı', 'Gorev=Normal'] 
+
+} 
+
+df = pd.DataFrame(data) 
+
+print(df) 
